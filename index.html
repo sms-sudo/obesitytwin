@@ -1,0 +1,1115 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>Obesity Treatment Twin</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
+<style>
+/* Layout: a clinician's worksheet. Patient on the left, the ten futures on the right; tables carry every number,
+   the chart carries the shape. */
+:root {
+  --bg: #f6f7f5; --panel: #ffffff; --ink: #14212b; --ink-2: #4a5763; --ink-3: #6d7882; --rule: #dde2e0;
+  --rule-2: #c9d0cd; --accent: #1d5c7a; --accent-soft: #e3eef3; --warn: #8a5a00; --warn-soft: #fbf0d9;
+  --good: #1f6b3b; --bad: #9b2c22; --band: rgba(29, 92, 122, 0.14); --focus: #1d5c7a;
+  --s-none: #6b6a66; --s-nutr: #b07d00; --s-phen: #008300; --s-phentpm: #6250d6; --s-nb: #6250d6; --s-lira: #c45584;
+  --s-sema: #2a78d6; --s-tirz: #12946a; --s-sleeve: #d4561f; --s-rygb: #c93a39;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --r: 6px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121719; --panel: #1a2124; --ink: #e8ecea; --ink-2: #b8c1c4; --ink-3: #8f9a9e; --rule: #2b3438;
+    --rule-2: #3a4549; --accent: #7cc0dd; --accent-soft: #1d3540; --warn: #e5b45a; --warn-soft: #3a2f17;
+    --good: #6fcf8f; --bad: #f08a80; --band: rgba(124, 192, 221, 0.16); --focus: #7cc0dd;
+    --s-none: #a8a69f; --s-nutr: #c98500; --s-phen: #3fae3f; --s-phentpm: #9085e9; --s-nb: #9085e9; --s-lira: #d55181;
+    --s-sema: #3987e5; --s-tirz: #199e70; --s-sleeve: #d95926; --s-rygb: #e66767;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121719; --panel: #1a2124; --ink: #e8ecea; --ink-2: #b8c1c4; --ink-3: #8f9a9e; --rule: #2b3438;
+  --rule-2: #3a4549; --accent: #7cc0dd; --accent-soft: #1d3540; --warn: #e5b45a; --warn-soft: #3a2f17;
+  --good: #6fcf8f; --bad: #f08a80; --band: rgba(124, 192, 221, 0.16); --focus: #7cc0dd;
+  --s-none: #a8a69f; --s-nutr: #c98500; --s-phen: #3fae3f; --s-phentpm: #9085e9; --s-nb: #9085e9; --s-lira: #d55181;
+  --s-sema: #3987e5; --s-tirz: #199e70; --s-sleeve: #d95926; --s-rygb: #e66767;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 600; text-wrap: balance; margin: 0; }
+h1 { font-size: 1.75rem; letter-spacing: -0.01em; }
+h2 { font-size: 1.2rem; }
+h3 { font-size: 1rem; font-family: var(--sans); font-weight: 700; }
+.wrap { max-width: 1320px; margin: 0 auto; }
+header.top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px;
+  padding-block: 22px 14px; border-bottom: 1px solid var(--rule); }
+header.top p { margin: 4px 0 0; color: var(--ink-2); max-width: 70ch; }
+.status { font-size: 0.85rem; color: var(--ink-3); }
+.status b { color: var(--ink); font-weight: 600; }
+.grid { display: grid; grid-template-columns: minmax(300px, 380px) minmax(0, 1fr); gap: 20px; margin-top: 18px; align-items: start; }
+@media (max-width: 920px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+form.patient { background: var(--panel); border: 1px solid var(--rule); border-radius: var(--r); padding: 14px 16px 18px;
+  position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); max-height: calc(100vh - 24px); overflow-y: auto; }
+@media (max-width: 920px) { form.patient { position: static; max-height: none; } }
+fieldset { border: 0; padding: 0; margin: 0 0 14px; display: grid; gap: 8px; }
+legend { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3);
+  padding: 10px 0 4px; border-top: 1px solid var(--rule); width: 100%; }
+fieldset:first-of-type legend { border-top: 0; padding-top: 0; }
+.row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 10px; }
+.row.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.f { display: grid; gap: 2px; font-size: 0.82rem; color: var(--ink-2); align-content: start; }
+input[type="number"], select { font: inherit; font-size: 0.95rem; color: var(--ink); background: var(--bg); border: 1px solid var(--rule-2);
+  border-radius: 4px; padding: 5px 7px; width: 100%; min-width: 0; font-variant-numeric: tabular-nums; }
+input:focus-visible, select:focus-visible, button:focus-visible, .chip:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+.checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3px 10px; }
+.checks label { display: flex; gap: 6px; align-items: flex-start; font-size: 0.86rem; color: var(--ink); }
+.checks input { margin-top: 3px; accent-color: var(--accent); }
+.seg { display: flex; border: 1px solid var(--rule-2); border-radius: 4px; overflow: hidden; }
+.seg label { flex: 1; text-align: center; font-size: 0.85rem; padding: 5px 4px; cursor: pointer; color: var(--ink-2); }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label:has(input:checked) { background: var(--accent-soft); color: var(--ink); font-weight: 600; }
+.hint { font-size: 0.78rem; color: var(--ink-3); margin: 0; }
+.bmi { font-size: 0.9rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.bmi b { color: var(--ink); }
+.btnrow { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; font-size: 0.85rem; border: 1px solid var(--rule-2); background: var(--panel); color: var(--ink); border-radius: 4px;
+  padding: 5px 10px; cursor: pointer; }
+button:hover { border-color: var(--accent); }
+.results { display: grid; gap: 18px; min-width: 0; }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: var(--r); padding: 16px 18px; min-width: 0; }
+.card > header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; margin-bottom: 10px; }
+.card > header p { margin: 2px 0 0; color: var(--ink-2); font-size: 0.88rem; max-width: 75ch; }
+.lead { font-family: var(--serif); font-size: 1.12rem; line-height: 1.5; margin: 0; max-width: 72ch; }
+.lead b { font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--rule-2); border-radius: 999px; padding: 3px 10px 3px 8px;
+  font-size: 0.82rem; cursor: pointer; background: var(--panel); color: var(--ink-2); user-select: none; }
+.chip[aria-pressed="true"] { color: var(--ink); border-color: var(--ink-3); background: var(--bg); font-weight: 600; }
+.chip .sw { width: 14px; height: 3px; border-radius: 2px; background: currentColor; }
+.chip[disabled] { opacity: 0.45; cursor: not-allowed; }
+.chartbox { position: relative; margin-top: 8px; }
+svg.chart { width: 100%; height: auto; display: block; }
+svg.chart text { font-family: var(--sans); fill: var(--ink-2); font-size: 12px; }
+svg.chart .axis { stroke: var(--rule-2); stroke-width: 1; }
+svg.chart .grid { stroke: var(--rule); stroke-width: 1; }
+svg.chart .zero { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 2 3; }
+.tip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px;
+  padding: 6px 8px; font-size: 0.8rem; box-shadow: 0 2px 8px rgba(0,0,0,0.12); min-width: 170px; z-index: 5; }
+.tip div { display: flex; justify-content: space-between; gap: 10px; font-variant-numeric: tabular-nums; }
+.tablebox { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+thead th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); font-weight: 700; border-bottom: 1px solid var(--rule-2); }
+td .sub { color: var(--ink-3); font-size: 0.8rem; }
+td.strat { display: flex; align-items: center; gap: 8px; }
+td.strat .sw { width: 12px; height: 12px; border-radius: 3px; flex: none; }
+.pbar { display: inline-grid; grid-template-columns: 44px 32px; align-items: center; gap: 6px; }
+.pbar i { display: block; height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; }
+.pbar i b { display: block; height: 100%; background: var(--accent); }
+tr.muted td { color: var(--ink-3); }
+.flag { display: inline-block; font-size: 0.72rem; padding: 1px 6px; border-radius: 3px; background: var(--warn-soft); color: var(--warn); margin-left: 6px; font-weight: 600; }
+.ctl { display: flex; gap: 6px; align-items: center; font-size: 0.85rem; color: var(--ink-2); flex-wrap: wrap; }
+.ctl select { width: auto; }
+.lower { color: var(--good); } .higher { color: var(--bad); }
+.upd { display: grid; gap: 10px; }
+.upd .entries { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.note { font-size: 0.82rem; color: var(--ink-3); margin: 8px 0 0; max-width: 85ch; }
+.about { display: grid; gap: 10px; }
+.about p { margin: 0; max-width: 80ch; color: var(--ink-2); }
+.kv { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+.kv div { border-top: 2px solid var(--rule-2); padding-top: 6px; }
+.kv b { display: block; font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.kv span { font-size: 0.8rem; color: var(--ink-3); }
+.loading { padding: 40px 0; text-align: center; color: var(--ink-2); }
+.loading .bar { width: min(420px, 80%); height: 6px; background: var(--rule); border-radius: 3px; margin: 12px auto 0; overflow: hidden; }
+.loading .bar b { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+@media (prefers-reduced-motion: reduce) { .loading .bar b { transition: none; } }
+.err { color: var(--bad); }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Obesity Treatment Twin</h1>
+      <p>Forecasts for one patient under ten strategies: weight to three years, six cardiometabolic measures at one year and two-year risks of 20 complications. Learned from the records of adults treated at Mass General Brigham in 2018 to 2025.</p>
+    </div>
+    <div class="status" id="status">Loading the twin</div>
+  </header>
+
+  <div class="grid">
+    <form class="patient" id="patient" autocomplete="off">
+      <fieldset>
+        <legend>Patient</legend>
+        <div class="row">
+          <label class="f" for="age">Age (years)<input type="number" id="age" min="18" max="85" step="1" value="52"></label>
+          <div class="f"><span style="font-size:0.82rem;color:var(--ink-2)">Sex</span>
+            <div class="seg" role="radiogroup" aria-label="Sex">
+              <label><input type="radio" name="sex" id="sex_f" value="f" checked>Female</label>
+              <label><input type="radio" name="sex" id="sex_m" value="m">Male</label>
+            </div></div>
+        </div>
+        <div class="ctl" style="justify-content:space-between">
+          <span>Units</span>
+          <div class="seg" role="radiogroup" aria-label="Units" style="min-width:180px">
+            <label><input type="radio" name="units" id="u_metric" value="metric" checked>kg, cm</label>
+            <label><input type="radio" name="units" id="u_us" value="us">lb, in</label>
+          </div>
+        </div>
+        <div class="row">
+          <label class="f" for="height"><span id="lab_height">Height (cm)</span><input type="number" id="height" step="0.5" value="168"></label>
+          <label class="f" for="weight"><span id="lab_weight">Weight today (kg)</span><input type="number" id="weight" step="0.1" value="104"></label>
+        </div>
+        <div class="bmi" id="bmi">Body-mass index</div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Weight in the past year</legend>
+        <p class="hint">Earlier weights shape the forecast. Leave blank if unknown.</p>
+        <div class="row">
+          <label class="f" for="w12"><span id="lab_w12">About 12 months ago (kg)</span><input type="number" id="w12" step="0.1" value="101"></label>
+          <label class="f" for="w6"><span id="lab_w6">About 6 months ago (kg)</span><input type="number" id="w6" step="0.1" value="103"></label>
+        </div>
+        <div class="row">
+          <label class="f" for="w9"><span id="lab_w9">About 9 months ago (kg)</span><input type="number" id="w9" step="0.1"></label>
+          <label class="f" for="w3"><span id="lab_w3">About 3 months ago (kg)</span><input type="number" id="w3" step="0.1"></label>
+        </div>
+        <div class="row">
+          <label class="f" for="clinic_visits">Clinic visits, past year<input type="number" id="clinic_visits" min="0" step="1" value="3"></label>
+          <label class="f" for="remote_visits">Video or phone visits<input type="number" id="remote_visits" min="0" step="1" value="1"></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Diabetes</legend>
+        <div class="seg" role="radiogroup" aria-label="Diabetes status">
+          <label><input type="radio" name="dm" id="dm_none" value="none">None</label>
+          <label><input type="radio" name="dm" id="dm_pre" value="pre" checked>Prediabetes</label>
+          <label><input type="radio" name="dm" id="dm_t2" value="t2">Type 2</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Latest measurements</legend>
+        <div class="row three">
+          <label class="f" for="hba1c0">HbA1c (%)<input type="number" id="hba1c0" step="0.1" value="6.1"></label>
+          <label class="f" for="sbp0">Systolic (mm Hg)<input type="number" id="sbp0" step="1" value="134"></label>
+          <label class="f" for="ldl0">LDL (mg/dl)<input type="number" id="ldl0" step="1" value="118"></label>
+          <label class="f" for="tg0">Triglycerides<input type="number" id="tg0" step="1" value="162"></label>
+          <label class="f" for="alt0">ALT (U/l)<input type="number" id="alt0" step="1" value="34"></label>
+          <label class="f" for="egfr0">eGFR<input type="number" id="egfr0" step="1" value="88"></label>
+          <label class="f" for="ast0">AST (U/l)<input type="number" id="ast0" step="1" value="28"></label>
+          <label class="f" for="plt0">Platelets (10⁹/l)<input type="number" id="plt0" step="1" value="260"></label>
+          <div class="f"><span style="font-size:0.82rem;color:var(--ink-2)">FIB-4</span><span class="bmi" id="fib4show">–</span></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Recorded conditions</legend>
+        <div class="checks" id="conds"></div>
+      </fieldset>
+      <fieldset>
+        <legend>Earlier events</legend>
+        <div class="checks" id="events"></div>
+      </fieldset>
+      <fieldset>
+        <legend>Current medicines</legend>
+        <div class="checks" id="meds"></div>
+      </fieldset>
+      <fieldset>
+        <legend>Earlier weight treatment</legend>
+        <div class="checks" id="prior"></div>
+        <label class="f" for="n_prior_courses" style="max-width:50%">Earlier treatment courses<input type="number" id="n_prior_courses" min="0" step="1" value="0"></label>
+      </fieldset>
+      <div class="btnrow">
+        <button type="button" id="ex1">Example: prediabetes, BMI 37</button>
+        <button type="button" id="ex2">Example: diabetes, BMI 43</button>
+      </div>
+    </form>
+
+    <div class="results" id="results">
+      <div class="card loading" id="loading">Loading the twin's models
+        <div class="bar"><b id="loadbar"></b></div>
+        <p class="note" id="loadnote" style="margin-inline:auto"></p>
+      </div>
+
+      <section class="card" id="c_summary" hidden>
+        <p class="lead" id="lead"></p>
+      </section>
+
+      <section class="card" id="c_weight" hidden>
+        <header>
+          <div><h2>Weight under each strategy</h2>
+          <p>Expected change from today, with the range that holds 8 of 10 patients like this one. Choose up to six strategies to draw; hover a line for values.</p></div>
+        </header>
+        <div class="chips" id="chips"></div>
+        <div class="chartbox" id="chartbox">
+          <svg class="chart" id="chart" viewBox="0 0 720 330" role="img" aria-label="Forecast weight change over 36 months under the selected strategies"></svg>
+          <div class="tip" id="tip" hidden></div>
+        </div>
+        <div class="ctl" style="margin-top:10px">
+          <label for="hsel">Table at</label>
+          <select id="hsel"><option value="6">6 months</option><option value="12" selected>12 months</option><option value="24">24 months</option><option value="36">36 months</option></select>
+        </div>
+        <div class="tablebox"><table id="wtable"></table></div>
+        <p class="note" id="wnote"></p>
+      </section>
+
+      <section class="card" id="c_update" hidden>
+        <header><div><h2>Update with weights measured after the start</h2>
+          <p id="uintro">Once a strategy has started, the weights measured since sharpen its forecast. Enter the week of each weight; the twin uses the latest two, from week 2 to week 52.</p></div></header>
+        <div class="upd">
+          <div class="ctl"><label for="ustrat">Strategy started</label><select id="ustrat"></select></div>
+          <div class="ctl" id="umedbox" hidden>
+            <label for="utaking">Still taking it?</label><select id="utaking"><option value="">Not known</option><option value="1" selected>Yes</option><option value="0">No, stopped</option></select>
+            <span id="udosebox"><label for="udose">Highest dose so far</label><select id="udose"></select></span>
+          </div>
+          <div class="ctl" id="uvisitbox" hidden><label for="uvisit">Weeks since the start today</label><input type="number" id="uvisit" min="2" max="52" step="1" placeholder="latest weight"></div>
+          <div class="entries" id="uentries"></div>
+          <div class="tablebox"><table id="utable"></table></div>
+        </div>
+      </section>
+
+      <section class="card" id="c_traits" hidden>
+        <header><div><h2>Cardiometabolic measures at 12 months</h2>
+          <p>Expected value under each strategy (80% range below). A blank baseline leaves its column empty.</p></div></header>
+        <div class="tablebox"><table id="ttable"></table></div>
+        <div class="tablebox" style="margin-top:12px"><table id="gtable"></table></div>
+      </section>
+
+      <section class="card" id="c_risk" hidden>
+        <header><div><h2>Two-year risk of complications</h2>
+          <p>Risk of a recorded first diagnosis within two years, without treatment and under the strategies drawn above. Ratios are calibrated on negative-control outcomes and shrunk towards no effect in proportion to their uncertainty.</p></div></header>
+        <div class="tablebox"><table id="rtable"></table></div>
+        <p class="note" id="rnote"></p>
+      </section>
+
+      <section class="card about" id="c_about" hidden>
+        <h2>How the twin was built and checked</h2>
+        <div class="kv" id="kv"></div>
+        <p id="abouttext"></p>
+        <p class="note">For research and discussion. The forecasts are model estimates for patients like the one described, not observed outcomes and not a prescription. Prescribing cautions shown beside a strategy come from its labelling, not from the twin.</p>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+// The twin's evaluator: LightGBM trees exported by twin3_engine.py, evaluated exactly as LightGBM does
+// (numerical splits; missing values follow the split's default direction). Shared by the page and the Node check.
+(function (root) {
+  "use strict";
+
+  function packModel(m) {
+    // typed arrays per tree, for speed
+    m.packed = m.trees.map(function (t) {
+      return {
+        n: t.f.length,
+        f: Int32Array.from(t.f), t: Float64Array.from(t.t), m: Int8Array.from(t.m),
+        l: Int32Array.from(t.l), r: Int32Array.from(t.r), v: Float64Array.from(t.v)
+      };
+    });
+    m.index = {};
+    m.features.forEach(function (f, i) { m.index[f] = i; });
+    return m;
+  }
+
+  function rawScore(m, x) {
+    var s = 0;
+    var P = m.packed;
+    for (var k = 0; k < P.length; k++) {
+      var t = P[k];
+      if (t.n === 0) { s += t.v[0]; continue; }
+      var node = 0;
+      for (;;) {
+        var fv = x[t.f[node]];
+        var code = t.m[node];
+        var mt = code >> 1;
+        if (fv !== fv && mt !== 2) fv = 0.0;            // NaN treated as zero unless NaN is the missing type
+        var left;
+        if ((mt === 1 && Math.abs(fv) <= 1e-35) || (mt === 2 && fv !== fv)) left = (code & 1) === 1;
+        else left = fv <= t.t[node];
+        var nx = left ? t.l[node] : t.r[node];
+        if (nx < 0) { s += t.v[-nx - 1]; break; }
+        node = nx;
+      }
+    }
+    return s;
+  }
+
+  function predict(m, x) {
+    var s = rawScore(m, x);
+    return m.link === "logit" ? 1 / (1 + Math.exp(-s)) : s;
+  }
+
+  // build a model's input vector from named values (base inputs, horizon, strategy, the updating weight)
+  function vector(m, named) {
+    var x = new Float64Array(m.features.length);
+    for (var i = 0; i < m.features.length; i++) {
+      var v = named[m.features[i]];
+      x[i] = (v === undefined || v === null) ? NaN : v;
+    }
+    return x;
+  }
+
+  // the predictive distribution: forecast f, spread s, conformal quantiles q at levels L
+  function quantileAt(q, L, a) {
+    if (a <= L[0]) return q[0];
+    if (a >= L[L.length - 1]) return q[q.length - 1];
+    for (var i = 1; i < L.length; i++) {
+      if (a <= L[i]) {
+        var w = (a - L[i - 1]) / (L[i] - L[i - 1]);
+        return q[i - 1] + w * (q[i] - q[i - 1]);
+      }
+    }
+    return q[q.length - 1];
+  }
+
+  function cdfAt(q, L, v) {
+    // P(Z <= v): linear between the quantiles, flat beyond (as in the engine)
+    if (v <= q[0]) return 0.0025;
+    if (v >= q[q.length - 1]) return 0.9975;
+    for (var i = 1; i < q.length; i++) {
+      if (v <= q[i]) {
+        var d = q[i] - q[i - 1];
+        var w = d > 0 ? (v - q[i - 1]) / d : 0;
+        return L[i - 1] + w * (L[i] - L[i - 1]);
+      }
+    }
+    return 0.9975;
+  }
+
+  // numpy rounds halves to even; so must the page, or a value on a half step would fall on the other side of a split
+  function roundHalfEven(x) {
+    var r = Math.round(x);
+    if (Math.abs(x - Math.trunc(x)) === 0.5) return 2 * Math.round(x / 2);
+    return r;
+  }
+
+  // input cleaning, as in training: bounded at the 0.5th and 99.5th centiles, rounded to clinical precision
+  function clean(spec, raw) {
+    var out = {};
+    spec.inputs.forEach(function (d) {
+      var v = raw[d.name];
+      if (d.type === "flag") { out[d.name] = v ? 1 : 0; return; }
+      if (v === undefined || v === null || v === "" || !isFinite(v) || d.lo === null || d.hi === null) {
+        out[d.name] = d.share_missing > 0 ? NaN : (d.median === null ? NaN : d.median);
+        return;
+      }
+      v = Math.min(Math.max(+v, d.lo), d.hi);
+      out[d.name] = roundHalfEven(v / d.step) * d.step;
+    });
+    return out;
+  }
+
+  var api = { packModel: packModel, rawScore: rawScore, predict: predict, vector: vector,
+              quantileAt: quantileAt, cdfAt: cdfAt, clean: clean, roundHalfEven: roundHalfEven };
+  if (typeof module !== "undefined" && module.exports) module.exports = api;
+  else root.TwinCore = api;
+})(this);
+
+</script>
+<script>
+(function () {
+  "use strict";
+  var T = window.TwinCore;
+  var LAB = { NONE: "No treatment yet", NUTR: "Nutrition programme", PHEN: "Phentermine", PHEN_TPM: "Phentermine–topiramate",
+    NB: "Naltrexone–bupropion", LIRA: "Liraglutide", SEMA: "Semaglutide", TIRZ: "Tirzepatide", SLEEVE: "Sleeve gastrectomy",
+    RYGB: "Gastric bypass" };
+  var COLV = { NONE: "--s-none", NUTR: "--s-nutr", PHEN: "--s-phen", PHEN_TPM: "--s-phentpm", NB: "--s-nb", LIRA: "--s-lira",
+    SEMA: "--s-sema", TIRZ: "--s-tirz", SLEEVE: "--s-sleeve", RYGB: "--s-rygb" };
+  var DASH = { NONE: "6 4", NB: "2 3" };
+  var MEDS = ["PHEN", "PHEN_TPM", "NB", "LIRA", "SEMA", "TIRZ"];
+  var TRAIT = { hba1c: ["HbA1c", "%", 1, "hba1c0"], sbp: ["Systolic", "mm Hg", 0, "sbp0"], ldl: ["LDL", "mg/dl", 0, "ldl0"],
+    tg: ["Triglycerides", "mg/dl", 0, "tg0"], alt: ["ALT", "U/l", 0, "alt0"], fib4: ["FIB-4", "", 2, "fib40"] };
+  // the tool's inputs that mark a patient as not at risk of an outcome (a first recorded diagnosis)
+  var HISTMAP = { mi: "h_mi", ischemic_stroke: "h_stroke", hemorrhagic_stroke: "h_stroke", heart_failure: "dx_heart_failure",
+    atrial_fibrillation: "dx_atrial_fibrillation", venous_thromboembolism: "h_vte", hypertension: "dx_hypertension",
+    type2_diabetes: "t2d", ckd: "dx_ckd", sleep_apnea: "dx_sleep_apnea", masld_mash: "dx_masld_mash", knee_oa: "dx_knee_oa",
+    gallbladder_disease: "h_gallbladder", cholecystectomy: "h_gallbladder", acute_pancreatitis: "h_pancreatitis",
+    depression: "dx_depression", alcohol_use_disorder: "alcohol_or_substance", gerd: "dx_gerd" };
+  var S = { spec: null, M: {}, sel: ["NONE", "PHEN", "SEMA", "TIRZ", "SLEEVE"], focus: "TIRZ", units: "metric", out: null };
+  var $ = function (id) { return document.getElementById(id); };
+  var css = function (v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim() || "#888"; };
+  var fmt = function (v, d) { return (v === null || !isFinite(v)) ? "–" : v.toFixed(d === undefined ? 1 : d).replace("-", "−"); };
+  var sgn = function (v, d) { return (v > 0 ? "+" : "") + fmt(v, d); };
+  var pct = function (p) { return !isFinite(p) ? "–" : (p < 0.01 ? "<1%" : p > 0.99 ? ">99%" : Math.round(p * 100) + "%"); };
+
+  // ------------------------------------------------------------------ loading
+  function loadJSON(url) {
+    return fetch(url).then(function (r) {
+      if (!r.ok) throw new Error(url + " returned " + r.status);
+      return r.arrayBuffer();
+    }).then(function (ab) {
+      var b = new Uint8Array(ab);
+      if (b[0] === 0x1f && b[1] === 0x8b) {
+        var ds = new Blob([b]).stream().pipeThrough(new DecompressionStream("gzip"));
+        return new Response(ds).text();
+      }
+      return new TextDecoder().decode(b);
+    }).then(JSON.parse);
+  }
+
+  function modelNames(spec) {
+    var n = [];
+    var w = spec.weight;
+    if (w && w.design === "single") n.push(w.model, w.spread);
+    else if (w) { n.push(w.untreated, w.spread); Object.keys(w.effects).forEach(function (s) { n.push(w.effects[s]); }); }
+    if (spec.update) n.push(spec.update.model, spec.update.spread);
+    Object.keys(spec.traits || {}).forEach(function (v) {
+      var t = spec.traits[v];
+      if (t.design === "single") { n.push(t.model, t.spread); return; }
+      n.push(t.untreated, t.spread);
+      Object.keys(t.effects).forEach(function (s) { n.push(t.effects[s]); });
+    });
+    Object.keys(spec.events || {}).forEach(function (k) { n.push(spec.events[k].model); });
+    return n;
+  }
+
+  function boot() {
+    loadJSON("models/twin_spec.json").then(function (spec) {
+      S.spec = spec;
+      var names = modelNames(spec);
+      var done = 0;
+      $("loadnote").textContent = names.length + " model files";
+      var queue = names.slice();
+      function worker() {
+        if (!queue.length) return Promise.resolve();
+        var nm = queue.shift();
+        return loadJSON("models/" + nm + ".json").then(function (m) {
+          S.M[nm] = T.packModel(m);
+          done++;
+          $("loadbar").style.width = (100 * done / names.length).toFixed(0) + "%";
+        }).then(worker);
+      }
+      var ws = [];
+      for (var i = 0; i < 6; i++) ws.push(worker());
+      return Promise.all(ws).then(function () { start(); });
+    }).catch(function (e) {
+      $("loading").innerHTML = '<p class="err">The twin could not load: ' + String(e.message || e) + "</p>";
+      $("status").textContent = "Not loaded";
+    });
+  }
+
+  // ------------------------------------------------------------------ the form
+  function buildChecks() {
+    var spec = S.spec;
+    var groups = { conds: [], events: [], meds: [], prior: [] };
+    spec.inputs.forEach(function (d) {
+      if (d.type !== "flag" || ["female", "t2d", "predm"].indexOf(d.name) >= 0) return;
+      var g = d.name.indexOf("rx_") === 0 ? "meds" : d.name.indexOf("h_") === 0 ? "events" :
+        d.name.indexOf("prior_") === 0 ? "prior" : "conds";
+      groups[g].push(d);
+    });
+    Object.keys(groups).forEach(function (g) {
+      var box = $(g);
+      box.innerHTML = "";
+      groups[g].forEach(function (d) {
+        var lab = document.createElement("label");
+        lab.innerHTML = '<input type="checkbox" id="' + d.name + '"><span>' + d.label + "</span>";
+        box.appendChild(lab);
+      });
+    });
+    ["dx_hypertension", "dx_sleep_apnea"].forEach(function (id) { if ($(id)) $(id).checked = true; });
+    if ($("rx_raas")) $("rx_raas").checked = true;
+  }
+
+  function num(id) {
+    var el = $(id);
+    if (!el || el.value === "") return NaN;
+    var v = +el.value;
+    return isFinite(v) ? v : NaN;
+  }
+
+  function readPatient() {
+    var us = S.units === "us";
+    var kg = function (v) { return us ? v * 0.45359237 : v; };
+    var ht = num("height"), wt = kg(num("weight"));
+    var htm = (us ? ht * 2.54 : ht) / 100;
+    var raw = {};
+    raw.age = num("age");
+    raw.female = $("sex_f").checked ? 1 : 0;
+    raw.height = htm;
+    raw.bmi0 = wt / (htm * htm);
+    // earlier weights: % change to today's, by day before the start (as the records were summarised)
+    var past = [[12, kg(num("w12"))], [9, kg(num("w9"))], [6, kg(num("w6"))], [3, kg(num("w3"))]].filter(function (a) { return isFinite(a[1]) && a[1] > 0; });
+    var pts = past.map(function (a) { return [-Math.round(30.4375 * a[0]), 100 * (wt - a[1]) / a[1], 100 * (a[1] - wt) / wt]; });
+    var pick = function (lo, hi, c) {
+      var best = null;
+      pts.forEach(function (p) { if (-p[0] >= lo && -p[0] <= hi && (best === null || Math.abs(-p[0] - c) < Math.abs(-best[0] - c))) best = p; });
+      return best ? best[1] : NaN;
+    };
+    raw.pre12 = pick(274, 456, 365);
+    raw.pre6 = pick(120, 240, 182);
+    var yr = pts.filter(function (p) { return p[0] >= -365; });
+    raw.npre = yr.length;
+    if (yr.length >= 1) raw.pre_max = Math.max.apply(null, yr.map(function (p) { return p[2]; }));
+    if (yr.length >= 3) {
+      var n = yr.length, mx = 0, my = 0;
+      yr.forEach(function (p) { mx += p[0] / n; my += p[2] / n; });
+      var sxx = 0, sxy = 0;
+      yr.forEach(function (p) { sxx += (p[0] - mx) * (p[0] - mx); sxy += (p[0] - mx) * (p[2] - my); });
+      var b = sxx > 0 ? sxy / sxx : 0, a = my - b * mx, ss = 0;
+      yr.forEach(function (p) { var r = p[2] - (a + b * p[0]); ss += r * r; });
+      raw.pre_slope = 30.4375 * b;
+      raw.sd_pre = Math.sqrt(ss / Math.max(n - 2, 1));
+    }
+    raw.clinic_visits = num("clinic_visits");
+    raw.remote_visits = num("remote_visits");
+    raw.n_prior_courses = num("n_prior_courses");
+    raw.start_year = S.spec.deployment_year;
+    ["hba1c0", "sbp0", "ldl0", "tg0", "alt0", "egfr0"].forEach(function (k) { raw[k] = num(k); });
+    var ast = num("ast0"), plt = num("plt0");
+    raw.fib40 = (isFinite(ast) && isFinite(plt) && isFinite(raw.alt0) && plt > 0 && raw.alt0 > 0) ? raw.age * ast / (plt * Math.sqrt(raw.alt0)) : NaN;
+    raw.t2d = $("dm_t2").checked ? 1 : 0;
+    raw.predm = $("dm_pre").checked ? 1 : 0;
+    S.spec.inputs.forEach(function (d) {
+      if (d.type === "flag" && $(d.name) && d.name !== "female") raw[d.name] = $(d.name).checked ? 1 : 0;
+    });
+    return { raw: raw, clean: T.clean(S.spec, raw), wt: wt, htm: htm };
+  }
+
+  // ------------------------------------------------------------------ the twin
+  function eligible(c, s) {
+    if (S.spec.surgical.indexOf(s) >= 0) return c.bmi0 >= 35 && !c.prior_mbs;
+    return true;
+  }
+
+  function cautions(c, s) {
+    var cvd = c.dx_ischemic_heart_disease || c.dx_heart_failure || c.h_stroke || c.dx_atrial_fibrillation || c.h_pad;
+    if ((s === "PHEN" || s === "PHEN_TPM") && cvd) return "Labelling advises against use with cardiovascular disease";
+    if (s === "NB" && isFinite(c.sbp0) && c.sbp0 >= 160) return "Labelling advises against use with uncontrolled hypertension";
+    if (["LIRA", "SEMA", "TIRZ"].indexOf(s) >= 0 && c.h_pancreatitis) return "Earlier pancreatitis: labelling advises caution";
+    if (c.prior_incretin && ["LIRA", "SEMA", "TIRZ"].indexOf(s) >= 0) return "Effects were learned from first courses";
+    return "";
+  }
+
+  function onehot(s) {
+    var o = {};
+    S.spec.strategies.forEach(function (k) { o["s_" + k] = k === s ? 1 : 0; });
+    return o;
+  }
+
+  function dist(spec_, base, s, extra) {
+    // mean forecast, spread and quantile function for one strategy (weight or a trait)
+    var named = Object.assign({}, base, extra);
+    if (spec_.design === "single") {
+      // one model with the strategy as an input
+      var mm = S.M[spec_.model], nm1 = Object.assign({}, named, onehot(s));
+      if ((spec_.strategies || []).length && spec_.strategies.indexOf(s) < 0) return null;
+      var f1 = T.predict(mm, T.vector(mm, nm1));
+      var ms1 = S.M[spec_.spread];
+      return { f: f1, sig: Math.max(T.predict(ms1, T.vector(ms1, nm1)), spec_.spread_floor) };
+    }
+    var m0 = S.M[spec_.untreated];
+    var f = T.predict(m0, T.vector(m0, named));
+    if (s !== "NONE") {
+      var en = spec_.effects[s];
+      if (!en) return null;
+      var me = S.M[en];
+      f += T.predict(me, T.vector(me, named)) + (spec_.offsets[s] || 0);
+    }
+    var ms = S.M[spec_.spread];
+    var sig = Math.max(T.predict(ms, T.vector(ms, Object.assign(named, onehot(s)))), spec_.spread_floor);
+    return { f: f, sig: sig };
+  }
+
+  function compute() {
+    var P = readPatient(), c = P.clean, spec = S.spec, L = spec.quantile_levels;
+    var out = { P: P, wt: {}, tr: {}, risk: {}, upd: null };
+    spec.strategies.forEach(function (s) {
+      if (!eligible(c, s)) return;
+      var row = {};
+      for (var i = 0; i < spec.horizons_months.length; i++) {
+        var h = spec.horizons_months[i];
+        var d = dist(spec.weight, c, s, { horizon: h });
+        if (!d) { row = null; break; }
+        var q = spec.weight.z_quantiles[String(h)];
+        row[h] = { f: d.f, lo: d.f + d.sig * T.quantileAt(q, L, 0.1), hi: d.f + d.sig * T.quantileAt(q, L, 0.9),
+          p: [5, 10, 15, 20].map(function (t) { return T.cdfAt(q, L, (-t - d.f) / d.sig); }) };
+      }
+      if (row) out.wt[s] = row;
+    });
+    Object.keys(spec.traits || {}).forEach(function (v) {
+      var ts = spec.traits[v], b0 = c[TRAIT[v][3]];
+      out.tr[v] = {};
+      if (!isFinite(b0)) return;
+      Object.keys(out.wt).forEach(function (s) {
+        var d = dist(ts, c, s, { horizon: 12 });
+        if (!d || !ts.z_quantiles) return;
+        var q = ts.z_quantiles, f = d.f, lo = f + d.sig * T.quantileAt(q, L, 0.1), hi = f + d.sig * T.quantileAt(q, L, 0.9);
+        var tx = ts.log_scale ? function (x) { return b0 * Math.exp(x); } : function (x) { return b0 + x; };
+        var goal = function (thr, above) {
+          var z = ts.log_scale ? (Math.log(thr / b0) - f) / d.sig : (thr - b0 - f) / d.sig;
+          var pl = T.cdfAt(q, L, z);
+          return above ? 1 - pl : pl;
+        };
+        out.tr[v][s] = { v: tx(f), lo: tx(lo), hi: tx(hi), goal: goal };
+      });
+    });
+    Object.keys(spec.events || {}).forEach(function (k) {
+      var e = spec.events[k];
+      var excluded = e.at_risk_excludes.some(function (fam) { return HISTMAP[fam] && c[HISTMAP[fam]] === 1; });
+      if (e.women_only && !c.female) excluded = true;
+      if (excluded) { out.risk[k] = null; return; }
+      var m = S.M[e.model];
+      var p0 = T.predict(m, T.vector(m, c));
+      var r = { NONE: { p: p0 } };
+      Object.keys(out.wt).forEach(function (s) {
+        if (s === "NONE") return;
+        var q = e.ratios[s];
+        if (q) r[s] = { p: Math.min(p0 * q.rr, 0.99), rr: q.rr, lo: q.lo, hi: q.hi, trial: q.source === "trial" ? q.trial : null };
+      });
+      out.risk[k] = r;
+    });
+    out.upd = computeUpdate(c, out);
+    S.out = out;
+    return out;
+  }
+
+  var MD = 30.4375, NU = 6, CHECKS = [1, 2, 3, 4, 6, 9];
+
+  function dynAt(ws, D) {
+    // the weights to the visit, as the twin's updated forecast reads them: the latest change, days since it, how many,
+    // the change per month between the last two, the lowest change, and the change nearest 1, 2, 3, 4, 6 and 9 months
+    var v = ws.filter(function (w) { return w.day <= D; });
+    var o = { last_change: NaN, days_since_last: NaN, weights: v.length, slope: NaN, lowest_change: NaN };
+    CHECKS.forEach(function (c) { o["change_near_" + c + "m"] = NaN; });
+    if (!v.length) return o;
+    var L = v[v.length - 1];
+    o.last_change = L.chg;
+    o.days_since_last = D - L.day;
+    if (v.length > 1) {
+      var P = v[v.length - 2], dt = (L.day - P.day) / MD;
+      if (dt > 0.2) o.slope = (L.chg - P.chg) / dt;
+    }
+    o.lowest_change = Math.min.apply(null, v.map(function (w) { return w.chg; }));
+    CHECKS.forEach(function (c) {
+      var cd = Math.round(MD * c);
+      if (cd > D) return;
+      var win = Math.max(10, Math.floor(0.25 * cd)), best = null;
+      v.forEach(function (w) { var a = Math.abs(w.day - cd); if (a <= win && (best === null || a < best.a)) best = { a: a, chg: w.chg }; });
+      if (best) o["change_near_" + c + "m"] = best.chg;
+    });
+    o._syg = 0; o._sgg = 0;
+    v.forEach(function (w) { var g = 1 - Math.exp(-w.day / MD / 6); o._syg += w.chg * g; o._sgg += g * g; });
+    return o;
+  }
+
+  function computeUpdate(c, out) {
+    var spec = S.spec, U = spec.update;
+    if (!U) return null;
+    var s = $("ustrat").value;
+    if (!s || !out.wt[s]) return null;
+    var design = U.design || "latest weight";
+    // the weights measured after the start, by day
+    var ws = [];
+    for (var i = 0; i < NU; i++) {
+      var wk = num("uw_" + i), w = num("uk_" + i);
+      if (!isFinite(wk) || !isFinite(w) || w <= 0) continue;
+      var day = Math.round(wk * 7);
+      if (day < U.first_day || day > U.last_day) continue;
+      ws.push({ day: day, chg: 100 * ((S.units === "us" ? w * 0.45359237 : w) - out.P.wt) / out.P.wt });
+    }
+    ws.sort(function (a, b) { return a.day - b.day; });
+    var vw0 = num("uvisit");
+    if (!ws.length && !(design === "visit" && isFinite(vw0))) return { s: s, rows: null };
+    var L = spec.quantile_levels, feat, D;
+    if (design === "visit") {
+      // a visit, with or without weights since the start: today, or the day of the latest weight
+      D = isFinite(vw0) ? Math.round(vw0 * 7) : ws[ws.length - 1].day;
+      feat = dynAt(ws, D);
+      feat.visit_month = D / MD;
+      var medv = (U.medicines || []).indexOf(s) >= 0;
+      var tkv = $("utaking") ? $("utaking").value : "", dzv = $("udose") ? $("udose").value : "";
+      feat.taking = medv && tkv !== "" ? +tkv : NaN;
+      feat.dose_band = medv && dzv !== "" ? +dzv : NaN;
+    } else if (design.indexOf("latest weight") === 0) {
+      var best = ws[ws.length - 1], prev = ws.length > 1 ? ws[ws.length - 2] : null;
+      D = best.day;
+      feat = { weight_day: best.day, weight_change: best.chg, prev_weight_change: prev ? prev.chg : NaN,
+               weight_slope: (prev && best.day > prev.day) ? (best.chg - prev.chg) / Math.max(best.day - prev.day, 1) * MD : NaN };
+    } else {
+      // the visit: today, or the day of the latest weight when today is not given
+      var vw = num("uvisit");
+      D = isFinite(vw) ? Math.round(vw * 7) : ws[ws.length - 1].day;
+      D = Math.max(D, ws[0].day);
+      feat = dynAt(ws, D);
+      feat.visit_month = D / MD;
+      var med = (U.medicines || []).indexOf(s) >= 0;
+      var tk = $("utaking") ? $("utaking").value : "";
+      var dz = $("udose") ? $("udose").value : "";
+      feat.still_taking = med && tk !== "" ? +tk : NaN;
+      feat.dose_band = med && dz !== "" ? +dz : NaN;
+    }
+    var rows = {};
+    spec.horizons_months.forEach(function (h) {
+      if (h * MD <= D) return;
+      var named = Object.assign({}, c, onehot(s), { horizon: h }, feat);
+      if (design.indexOf("curve") >= 0) {
+        var gh = 1 - Math.exp(-h / 6), a0 = out.wt[s][12].f / (1 - Math.exp(-2));
+        named.own_course = feat._sgg > 0 ? feat._syg / feat._sgg * gh : NaN;
+        named.own_course_shrunk = (feat._syg + a0) / (feat._sgg + 1) * gh;
+      }
+      var m = S.M[U.model], ms = S.M[U.spread];
+      var f = T.predict(m, T.vector(m, named));
+      var sig = Math.max(T.predict(ms, T.vector(ms, named)), U.spread_floor);
+      var q = U.z_quantiles[String(h)];
+      if (!q) return;
+      rows[h] = { f: f, lo: f + sig * T.quantileAt(q, L, 0.1), hi: f + sig * T.quantileAt(q, L, 0.9) };
+    });
+    var last = ws.filter(function (w) { return w.day <= D; }).pop() || null;
+    return { s: s, day: last ? last.day : D, chg: last ? last.chg : NaN, rows: rows };
+  }
+
+  // ------------------------------------------------------------------ rendering
+  function kgOf(p) { var w = S.out.P.wt * p / 100; return S.units === "us" ? w / 0.45359237 : w; }
+
+  function renderLead(o) {
+    var h = 12, best = null, bestS = null;
+    MEDS.forEach(function (s) { if (o.wt[s] && (best === null || o.wt[s][h].f < best)) { best = o.wt[s][h].f; bestS = s; } });
+    var none = o.wt.NONE ? o.wt.NONE[h] : null;
+    var txt = "";
+    if (bestS) {
+      var r = o.wt[bestS][h];
+      txt = "At 12 months the largest expected loss among the medicines comes with <b>" + LAB[bestS].toLowerCase() + "</b>: " +
+        fmt(r.f) + "% (8 in 10 patients like this one between " + fmt(r.lo) + "% and " + fmt(r.hi) + "%)";
+      if (none) txt += ", against " + sgn(none.f) + "% without treatment";
+      txt += ".";
+    }
+    var surg = ["SLEEVE", "RYGB"].filter(function (s) { return o.wt[s]; });
+    if (surg.length) {
+      txt += " " + surg.map(function (s) { return LAB[s] + " " + fmt(o.wt[s][h].f) + "%"; }).join(", ") + ".";
+    } else if (o.P.clean.bmi0 < 35) {
+      txt += " Operations are not shown: the twin learned them from patients with a body-mass index of 35 or more.";
+    }
+    $("lead").innerHTML = txt;
+  }
+
+  function renderChips(o) {
+    var box = $("chips");
+    box.innerHTML = "";
+    S.spec.strategies.forEach(function (s) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip";
+      var on = S.sel.indexOf(s) >= 0;
+      b.setAttribute("aria-pressed", on && o.wt[s] ? "true" : "false");
+      b.style.color = css(COLV[s]);
+      b.innerHTML = '<span class="sw"' + (DASH[s] ? ' style="background:repeating-linear-gradient(90deg,currentColor 0 3px,transparent 3px 5px)"' : "") +
+        '></span><span style="color:var(--ink)">' + LAB[s] + "</span>";
+      if (!o.wt[s]) { b.disabled = true; b.title = "Not shown for this patient"; }
+      b.addEventListener("click", function () {
+        var i = S.sel.indexOf(s);
+        if (i >= 0) S.sel.splice(i, 1); else { if (S.sel.length >= 6) S.sel.shift(); S.sel.push(s); }
+        S.focus = s;
+        render(false);
+      });
+      b.addEventListener("mouseenter", function () { S.focus = s; drawChart(S.out); });
+      box.appendChild(b);
+    });
+  }
+
+  function niceTicks(lo, hi) {
+    var span = hi - lo, step = span > 40 ? 10 : span > 20 ? 5 : span > 8 ? 2 : 1;
+    var t = [];
+    for (var v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) t.push(v);
+    return t;
+  }
+
+  function drawChart(o) {
+    var box = $("chartbox").clientWidth || 720;
+    var W = Math.max(340, Math.min(760, Math.round(box))), small = W < 560;
+    var H = small ? 300 : 330, m = { l: 46, r: small ? 100 : 148, t: 14, b: 38 };
+    var svg = $("chart");
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    var shown = S.sel.filter(function (s) { return o.wt[s]; });
+    var hs = [0].concat(S.spec.horizons_months);
+    var lo = -5, hi = 5;
+    shown.forEach(function (s) { S.spec.horizons_months.forEach(function (h) { lo = Math.min(lo, o.wt[s][h].lo); hi = Math.max(hi, o.wt[s][h].hi); }); });
+    var u = o.upd && o.upd.rows ? o.upd : null;
+    if (u) Object.keys(u.rows).forEach(function (h) { lo = Math.min(lo, u.rows[h].lo); hi = Math.max(hi, u.rows[h].hi); });
+    lo = Math.floor(lo - 1); hi = Math.ceil(hi + 1);
+    var X = function (mo) { return m.l + (W - m.l - m.r) * mo / 36; };
+    var Y = function (v) { return m.t + (H - m.t - m.b) * (hi - v) / (hi - lo); };
+    var g = [];
+    niceTicks(lo, hi).forEach(function (v) {
+      g.push('<line class="' + (v === 0 ? "zero" : "grid") + '" x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + Y(v) + '" y2="' + Y(v) + '"/>');
+      g.push('<text x="' + (m.l - 8) + '" y="' + (Y(v) + 4) + '" text-anchor="end">' + (v > 0 ? "+" : "") + String(v).replace("-", "−") + "%</text>");
+    });
+    hs.forEach(function (h) {
+      g.push('<text x="' + X(h) + '" y="' + (H - m.b + 18) + '" text-anchor="middle">' + h + "</text>");
+    });
+    g.push('<text x="' + ((m.l + W - m.r) / 2) + '" y="' + (H - 4) + '" text-anchor="middle">Months from the start</text>');
+    g.push('<line class="axis" x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + (H - m.b) + '" y2="' + (H - m.b) + '"/>');
+    var fs = shown.indexOf(S.focus) >= 0 ? S.focus : shown[shown.length - 1];
+    if (fs) {
+      var up = hs.map(function (h) { return X(h) + "," + Y(h ? o.wt[fs][h].hi : 0); });
+      var dn = hs.slice().reverse().map(function (h) { return X(h) + "," + Y(h ? o.wt[fs][h].lo : 0); });
+      g.push('<polygon points="' + up.concat(dn).join(" ") + '" fill="' + css(COLV[fs]) + '" fill-opacity="0.13" stroke="none"/>');
+    }
+    var labels = [];
+    shown.forEach(function (s) {
+      var col = css(COLV[s]);
+      var pts = hs.map(function (h) { return X(h) + "," + Y(h ? o.wt[s][h].f : 0); }).join(" ");
+      g.push('<polyline points="' + pts + '" fill="none" stroke="' + col + '" stroke-width="' + (s === fs ? 2.6 : 2) + '"' +
+        (DASH[s] ? ' stroke-dasharray="' + DASH[s] + '"' : "") + ' stroke-linejoin="round" stroke-linecap="round"/>');
+      S.spec.horizons_months.forEach(function (h) {
+        g.push('<circle cx="' + X(h) + '" cy="' + Y(o.wt[s][h].f) + '" r="3.2" fill="' + col + '" stroke="var(--panel)" stroke-width="1.5"/>');
+      });
+      labels.push({ s: s, y: Y(o.wt[s][36].f), col: col });
+    });
+    if (u) {
+      var col = css(COLV[u.s]);
+      var hh = Object.keys(u.rows).map(Number).sort(function (a, b) { return a - b; });
+      var hasW = isFinite(u.chg);
+      var pts = (hasW ? [[u.day / 30.4375, u.chg]] : []).concat(hh.map(function (h) { return [h, u.rows[h].f]; }));
+      if (pts.length > 1) g.push('<polyline points="' + pts.map(function (p) { return X(p[0]) + "," + Y(p[1]); }).join(" ") + '" fill="none" stroke="' + col +
+        '" stroke-width="2" stroke-dasharray="1 4" stroke-linecap="round"/>');
+      if (hasW) g.push('<circle cx="' + X(pts[0][0]) + '" cy="' + Y(pts[0][1]) + '" r="4.5" fill="var(--panel)" stroke="' + col + '" stroke-width="2"/>');
+    }
+    labels.sort(function (a, b) { return a.y - b.y; });
+    for (var i = 1; i < labels.length; i++) if (labels[i].y - labels[i - 1].y < 15) labels[i].y = labels[i - 1].y + 15;
+    labels.forEach(function (l) {
+      var nm = small ? LAB[l.s].replace("No treatment yet", "None yet").replace(" gastrectomy", "").replace("Phentermine–topiramate", "Phen–top.").replace("Naltrexone–bupropion", "Nal–bup.").replace("Nutrition programme", "Nutrition") : LAB[l.s];
+      g.push('<text x="' + (W - m.r + 6) + '" y="' + (l.y + 4) + '" style="fill:var(--ink)">' + nm + "</text>");
+    });
+    g.push('<rect id="hit" x="' + m.l + '" y="' + m.t + '" width="' + (W - m.l - m.r) + '" height="' + (H - m.t - m.b) + '" fill="transparent"/>');
+    svg.innerHTML = g.join("");
+    var hit = svg.querySelector("#hit"), tip = $("tip");
+    hit.addEventListener("mousemove", function (ev) {
+      var r = svg.getBoundingClientRect(), mx = (ev.clientX - r.left) * W / r.width;
+      var mo = 36 * (mx - m.l) / (W - m.l - m.r), h = S.spec.horizons_months.reduce(function (a, b) { return Math.abs(b - mo) < Math.abs(a - mo) ? b : a; });
+      var rows = shown.map(function (s) {
+        var v = o.wt[s][h];
+        return '<div><span style="color:' + css(COLV[s]) + '">■</span><span style="flex:1">' + LAB[s] + "</span><b>" + fmt(v.f) + "%</b></div>";
+      }).join("");
+      tip.innerHTML = "<div><b>" + h + " months</b><span></span></div>" + rows;
+      tip.hidden = false;
+      var bx = $("chartbox").getBoundingClientRect();
+      var left = ev.clientX - bx.left + 14;
+      if (left + 200 > bx.width) left = ev.clientX - bx.left - 214;
+      tip.style.left = Math.max(0, left) + "px";
+      tip.style.top = Math.max(0, ev.clientY - bx.top - 20) + "px";
+    });
+    hit.addEventListener("mouseleave", function () { tip.hidden = true; });
+  }
+
+  function renderWeightTable(o) {
+    var h = +$("hsel").value, c = o.P.clean;
+    var ss = Object.keys(o.wt).sort(function (a, b) { return o.wt[a][h].f - o.wt[b][h].f; });
+    var kgU = S.units === "us" ? "lb" : "kg";
+    var head = "<thead><tr><th>Strategy</th><th>Expected change</th><th>" + kgU + "</th><th>80% range</th><th>5% or more</th><th>10% or more</th><th>15% or more</th><th>20% or more</th></tr></thead>";
+    var body = ss.map(function (s) {
+      var r = o.wt[s][h], cau = cautions(c, s);
+      var bars = r.p.map(function (p) { return '<td><span class="pbar"><i><b style="width:' + (100 * p).toFixed(0) + '%"></b></i><span>' + pct(p) + "</span></span></td>"; }).join("");
+      return '<tr><td class="strat"><span class="sw" style="background:' + css(COLV[s]) + '"></span><span>' + LAB[s] +
+        (cau ? '<span class="flag" title="' + cau + '">caution</span>' : "") + "</span></td><td><b>" + fmt(r.f) + "%</b></td><td>" +
+        sgn(kgOf(r.f)) + "</td><td>" + fmt(r.lo) + " to " + fmt(r.hi) + "</td>" + bars + "</tr>";
+    }).join("");
+    $("wtable").innerHTML = head + "<tbody>" + body + "</tbody>";
+    var notes = [];
+    ss.forEach(function (s) { var cau = cautions(c, s); if (cau) notes.push(LAB[s] + ": " + cau.toLowerCase() + "."); });
+    $("wnote").textContent = "Chance columns: the chance of losing at least that share of today's weight by " + h + " months. " + notes.join(" ");
+  }
+
+  function renderMedQuestions(s) {
+    var U = S.spec.update || {}, box = $("umedbox");
+    if (!box) return;
+    var med = (U.medicines || []).indexOf(s) >= 0 && (U.design || "latest weight").indexOf("latest weight") !== 0;
+    box.hidden = !med;
+    if (!med) return;
+    var tsel = $("utaking");
+    if (U.taking_levels && tsel.getAttribute("data-levels") !== "3") {
+      tsel.innerHTML = '<option value="">Not known</option>' + U.taking_levels.map(function (a, i) {
+        return '<option value="' + a[1] + '"' + (i === 0 ? " selected" : "") + ">" + a[0] + "</option>"; }).join("");
+      tsel.setAttribute("data-levels", "3");
+    }
+    var menu = (U.dose_menus || {})[s], dsel = $("udose"), cur = dsel.value;
+    if (dsel.getAttribute("data-s") !== s) {
+      dsel.innerHTML = '<option value="">Not known</option>' + (menu || []).map(function (a) { return '<option value="' + a[1] + '">' + a[0] + "</option>"; }).join("");
+      dsel.setAttribute("data-s", s);
+      $("udosebox").hidden = !menu;
+    } else {
+      dsel.value = cur;
+    }
+  }
+
+  function renderUpdate(o) {
+    var sel = $("ustrat"), cur = sel.value;
+    var opts = Object.keys(o.wt).filter(function (s) { return s !== "NONE"; });
+    sel.innerHTML = '<option value="">Choose a strategy</option>' + opts.map(function (s) { return '<option value="' + s + '"' + (s === cur ? " selected" : "") + ">" + LAB[s] + "</option>"; }).join("");
+    renderMedQuestions(sel.value);
+    var u = o.upd;
+    if (!u || !u.rows) {
+      $("utable").innerHTML = '<tbody><tr class="muted"><td>' + (u ? (S.spec.update && S.spec.update.design === "visit" ? "Enter today's week since the start, or a week and the weight measured then." : "Enter a week from 2 to 52 and the weight measured then.") : "Choose the strategy that was started.") + "</td></tr></tbody>";
+      return;
+    }
+    var head = "<thead><tr><th>Months</th><th>Forecast at the start</th><th>Updated</th><th>80% range, updated</th></tr></thead>";
+    var body = Object.keys(u.rows).map(Number).sort(function (a, b) { return a - b; }).map(function (h) {
+      var a = o.wt[u.s][h], b = u.rows[h];
+      return "<tr><td>" + h + "</td><td>" + fmt(a.f) + "% <span class=\"sub\">(" + fmt(a.lo) + " to " + fmt(a.hi) + ")</span></td><td><b>" + fmt(b.f) + "%</b></td><td>" + fmt(b.lo) + " to " + fmt(b.hi) + "</td></tr>";
+    }).join("");
+    $("utable").innerHTML = head + "<tbody>" + body + "</tbody>";
+  }
+
+  function renderTraits(o) {
+    var vs = Object.keys(S.spec.traits || {});
+    var ss = Object.keys(o.wt);
+    var head = "<thead><tr><th>Strategy</th>" + vs.map(function (v) { return "<th>" + TRAIT[v][0] + (TRAIT[v][1] ? " (" + TRAIT[v][1] + ")" : "") + "</th>"; }).join("") + "</tr></thead>";
+    var c = o.P.clean;
+    var base = "<tr class=\"muted\"><td>Today</td>" + vs.map(function (v) { var b = c[TRAIT[v][3]]; return "<td>" + fmt(b, TRAIT[v][2]) + "</td>"; }).join("") + "</tr>";
+    var body = ss.map(function (s) {
+      return '<tr><td class="strat"><span class="sw" style="background:' + css(COLV[s]) + '"></span>' + LAB[s] + "</td>" + vs.map(function (v) {
+        var r = o.tr[v] && o.tr[v][s];
+        if (!r) return "<td>–</td>";
+        var b = c[TRAIT[v][3]], d = r.v - b;
+        return '<td><b class="' + (d < 0 ? "lower" : "higher") + '">' + fmt(r.v, TRAIT[v][2]) + '</b><br><span class="sub">' + fmt(r.lo, TRAIT[v][2]) + "–" + fmt(r.hi, TRAIT[v][2]) + "</span></td>";
+      }).join("") + "</tr>";
+    }).join("");
+    $("ttable").innerHTML = head + "<tbody>" + base + body + "</tbody>";
+    // goals at 12 months
+    var goals = [];
+    var hb = c.hba1c0;
+    if (isFinite(hb) && o.tr.hba1c) {
+      if (!c.t2d && hb < 6.5) goals.push(["HbA1c 6.5% or more (diabetes range)", "hba1c", 6.5, true]);
+      if (!c.t2d && c.predm && hb >= 5.7 && hb < 6.5) goals.push(["HbA1c below 5.7% (normal range)", "hba1c", 5.7, false]);
+      if (c.t2d && hb >= 7) goals.push(["HbA1c below 7.0%", "hba1c", 7.0, false]);
+    }
+    if (isFinite(c.sbp0) && c.sbp0 >= 130 && o.tr.sbp) goals.push(["Systolic below 130 mm Hg", "sbp", 130, false]);
+    if (isFinite(c.ldl0) && c.ldl0 >= 100 && o.tr.ldl) goals.push(["LDL below 100 mg/dl", "ldl", 100, false]);
+    if (!goals.length) { $("gtable").innerHTML = ""; return; }
+    var gh = "<thead><tr><th>Chance at 12 months of</th>" + ss.map(function (s) { return "<th>" + LAB[s] + "</th>"; }).join("") + "</tr></thead>";
+    var gb = goals.map(function (gl) {
+      return "<tr><td>" + gl[0] + "</td>" + ss.map(function (s) { var r = o.tr[gl[1]][s]; return "<td>" + (r ? pct(r.goal(gl[2], gl[3])) : "–") + "</td>"; }).join("") + "</tr>";
+    }).join("");
+    $("gtable").innerHTML = gh + "<tbody>" + gb + "</tbody>";
+  }
+
+  function renderRisk(o) {
+    var ss = S.sel.filter(function (s) { return o.wt[s] && s !== "NONE"; });
+    var keys = Object.keys(S.spec.events || {});
+    var head = "<thead><tr><th>Within two years</th><th>No treatment yet</th>" + ss.map(function (s) { return "<th>" + LAB[s] + "</th>"; }).join("") + "</tr></thead>";
+    var rows = keys.map(function (k) {
+      var r = o.risk[k], lab = S.spec.events[k].label;
+      if (r === null) return '<tr class="muted"><td>' + lab + "</td><td colspan=\"" + (ss.length + 1) + "\">already recorded</td></tr>";
+      var note = S.spec.events[k].note;
+      return "<tr><td>" + lab + (note ? ' <span class="sub" title="' + note + '">†</span>' : "") + "</td><td><b>" + pctf(r.NONE.p) + "</b></td>" + ss.map(function (s) {
+        var q = r[s];
+        if (!q) return note ? '<td title="No randomised trial has measured this effect, and the records cannot: ' + note.toLowerCase() + '">–</td>' : "<td>–</td>";
+        var cls = q.hi < 1 ? "lower" : q.lo > 1 ? "higher" : "";
+        var src = q.trial ? "from the randomised trial " + q.trial : "from MGB's records, calibrated on negative controls";
+        return '<td title="ratio ' + q.rr.toFixed(2) + " (" + q.lo.toFixed(2) + "–" + q.hi.toFixed(2) + "), " + src + '"><b class="' + cls + '">' + pctf(q.p) + '</b> <span class="sub">×' + q.rr.toFixed(2) + (q.trial ? "*" : "") + "</span></td>";
+      }).join("") + "</tr>";
+    }).join("");
+    $("rtable").innerHTML = head + "<tbody>" + rows + "</tbody>";
+    $("rnote").textContent = "Each risk is the untreated risk times the strategy's ratio. Coloured: the 95% interval of the ratio lies wholly below (green) or above (red) one. *, ratio from a randomised trial. †, recorded more often because of why and how treatment starts (or, for death, because healthier patients start treatment), so only trial ratios are used; – means no trial has measured the effect. Hover a cell for the ratio, its interval and its source.";
+  }
+
+  function pctf(p) { return !isFinite(p) ? "–" : (p < 0.001 ? "<0.1%" : (100 * p).toFixed(p < 0.1 ? 1 : 0) + "%"); }
+
+  function renderAbout() {
+    var v = S.spec.validation || {};
+    var items = (v.items || []).map(function (it) { return "<div><b>" + it.value + "</b><span>" + it.label + "</span></div>"; }).join("");
+    $("kv").innerHTML = items;
+    $("abouttext").textContent = v.text || "";
+  }
+
+  function render(full) {
+    var o = compute();
+    renderLead(o);
+    renderChips(o);
+    drawChart(o);
+    renderWeightTable(o);
+    renderUpdate(o);
+    renderTraits(o);
+    renderRisk(o);
+    var c = o.P.clean;
+    $("bmi").innerHTML = "Body-mass index <b>" + fmt(o.P.raw.bmi0) + "</b>" + (o.P.raw.bmi0 < 27 ? ' <span class="flag">below the range the twin learned from (27 or more)</span>' : "");
+    $("fib4show").textContent = isFinite(o.P.raw.fib40) ? o.P.raw.fib40.toFixed(2) : "–";
+    if (full) renderAbout();
+  }
+
+  function setUnits(u) {
+    if (u === S.units) return;
+    var toUS = u === "us";
+    ["height"].forEach(function (id) { var v = num(id); if (isFinite(v)) $(id).value = (toUS ? v / 2.54 : v * 2.54).toFixed(1); });
+    ["weight", "w12", "w9", "w6", "w3", "uk_0", "uk_1", "uk_2", "uk_3", "uk_4", "uk_5"].forEach(function (id) {
+      var v = num(id); if (isFinite(v)) $(id).value = (toUS ? v / 0.45359237 : v * 0.45359237).toFixed(1);
+    });
+    S.units = u;
+    var wl = toUS ? "lb" : "kg";
+    $("lab_height").textContent = "Height (" + (toUS ? "in" : "cm") + ")";
+    $("lab_weight").textContent = "Weight today (" + wl + ")";
+    [["lab_w12", 12], ["lab_w9", 9], ["lab_w6", 6], ["lab_w3", 3]].forEach(function (a) { $(a[0]).textContent = "About " + a[1] + " months ago (" + wl + ")"; });
+    for (var i = 0; i < NU; i++) { var l = $("ukl_" + i); if (l) l.textContent = "Weight (" + wl + ")"; }
+  }
+
+  function example(n) {
+    var set = function (id, v) { if ($(id)) $(id).value = v; };
+    var chk = function (ids) { S.spec.inputs.forEach(function (d) { if (d.type === "flag" && $(d.name)) $(d.name).checked = ids.indexOf(d.name) >= 0; }); };
+    setUnits("metric"); $("u_metric").checked = true;
+    if (n === 1) {
+      set("age", 52); $("sex_f").checked = true; set("height", 168); set("weight", 104); set("w12", 101); set("w9", ""); set("w6", 103); set("w3", "");
+      $("dm_pre").checked = true; set("hba1c0", 6.1); set("sbp0", 134); set("ldl0", 118); set("tg0", 162); set("alt0", 34); set("egfr0", 88);
+      set("ast0", 28); set("plt0", 260); set("clinic_visits", 3); set("remote_visits", 1); set("n_prior_courses", 0);
+      chk(["dx_hypertension", "dx_sleep_apnea", "rx_raas"]);
+    } else {
+      set("age", 58); $("sex_m").checked = true; set("height", 178); set("weight", 136); set("w12", 131); set("w9", ""); set("w6", 134); set("w3", "");
+      $("dm_t2").checked = true; set("hba1c0", 8.2); set("sbp0", 142); set("ldl0", 96); set("tg0", 238); set("alt0", 46); set("egfr0", 74);
+      set("ast0", 37); set("plt0", 215); set("clinic_visits", 6); set("remote_visits", 2); set("n_prior_courses", 0);
+      chk(["dx_hypertension", "dx_dyslipidemia", "dx_sleep_apnea", "dx_masld_mash", "dx_knee_oa", "rx_metformin", "rx_insulin", "rx_statin", "rx_raas"]);
+    }
+    render(false);
+  }
+
+  function start() {
+    $("loading").hidden = true;
+    ["c_summary", "c_weight", "c_update", "c_traits", "c_risk", "c_about"].forEach(function (id) { $(id).hidden = false; });
+    if (!S.spec.update) $("c_update").hidden = true;
+    buildChecks();
+    var ue = $("uentries");
+    var UD = S.spec.update || {}, visitDesign = (UD.design || "latest weight").indexOf("latest weight") !== 0;
+    ue.innerHTML = [0, 1, 2, 3, 4, 5].map(function (i) {
+      return '<div class="row"><label class="f" for="uw_' + i + '">Week<input type="number" id="uw_' + i + '" min="1" max="52" step="1"' + (i === 0 ? ' value="8"' : i === 1 ? ' value="16"' : "") + '></label>' +
+        '<label class="f" for="uk_' + i + '"><span id="ukl_' + i + '">Weight (kg)</span><input type="number" id="uk_' + i + '" step="0.1"' + (i === 0 ? ' value="100.5"' : i === 1 ? ' value="97.5"' : "") + "></label></div>";
+    }).join("");
+    if (visitDesign) {
+      $("uvisitbox").hidden = false;
+      $("uintro").textContent = UD.design === "visit" ?
+        "At any visit after the start, the forecast is updated with what is known by then: the weights measured since the start, if any, and for a medicine whether it is being taken and the highest dose reached. Enter today's week, and the week and weight of each measurement up to week 52." :
+        "Once a strategy has started, the weights measured since, and for a medicine whether it is still taken and the highest dose reached, sharpen its forecast. Enter the week and weight of each measurement from week 2 to week 52.";
+    }
+    $("patient").addEventListener("input", function (ev) {
+      if (ev.target.name === "units") return;
+      render(false);
+    });
+    $("patient").addEventListener("submit", function (ev) { ev.preventDefault(); });
+    document.querySelectorAll('input[name="units"]').forEach(function (el) { el.addEventListener("change", function () { setUnits(el.value); render(false); }); });
+    $("hsel").addEventListener("change", function () { renderWeightTable(S.out); });
+    $("ustrat").addEventListener("change", function () { render(false); });
+    ue.addEventListener("input", function () { render(false); });
+    ["utaking", "udose", "uvisit"].forEach(function (id) {
+      if ($(id)) { $(id).addEventListener("change", function () { render(false); }); $(id).addEventListener("input", function () { render(false); }); }
+    });
+    $("ex1").addEventListener("click", function () { example(1); });
+    $("ex2").addEventListener("click", function () { example(2); });
+    $("ustrat").innerHTML = '<option value="SEMA">Semaglutide</option>';
+    render(true);
+    $("ustrat").value = "SEMA";
+    render(false);
+    var nm = Object.keys(S.M).length;
+    $("status").innerHTML = "<b>" + nm + "</b> models loaded · fitted on starts to " + S.spec.deployment_year;
+    window.addEventListener("resize", function () { drawChart(S.out); });
+    if (window.matchMedia) {
+      var mq = window.matchMedia("(prefers-color-scheme: dark)");
+      if (mq.addEventListener) mq.addEventListener("change", function () { render(false); });
+    }
+  }
+
+  boot();
+})();
+
+</script>
+</body></html>
